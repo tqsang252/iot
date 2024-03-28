@@ -16,7 +16,7 @@ def getPort():
     return commPort
     # return "/dev/ttyUSB1"
 
-portName = "/dev/ttyUSB1"
+portName = getPort()
 print(portName)
 
 
@@ -27,8 +27,8 @@ try:
 except:
     print("Can not open the port")
 
-relay1_ON  = [0, 6, 0, 0, 0, 255, 200, 91]
-relay1_OFF = [0, 6, 0, 0, 0, 0, 136, 27]
+relay1_ON  = [2, 6, 0, 0, 0, 255, 200, 91]
+relay1_OFF = [2, 6, 0, 0, 0, 0, 136, 27]
 
 def setDevice1(state):
     if state == True:
@@ -58,24 +58,3 @@ while True:
     time.sleep(2)
     setDevice1(False)
     time.sleep(2)
-    
-soil_temperature =[1, 3, 0, 6, 0, 1, 100, 11]
-def readTemperature():
-    serial_read_data(ser)
-    ser.write(soil_temperature)
-    time.sleep(1)
-    return serial_read_data(ser)
-
-soil_moisture = [1, 3, 0, 7, 0, 1, 53, 203]
-def readMoisture():
-    serial_read_data(ser)
-    ser.write(soil_moisture)
-    time.sleep(1)
-    return serial_read_data(ser)
-
-while True:
-    print("TEST SENSOR")
-    print(readMoisture())
-    time.sleep(1)
-    print(readTemperature())
-    time.sleep(1)
